@@ -8,20 +8,20 @@ app = Flask(__name__)
 def index():
     return '<h1>Python Operations with Flask Routing and Views</h1>'
 
-@app.route('/print/<string:print>')
-def print_string(print):
-    # print("hello")
-    return f'{print}'
+@app.route('/print/<string:param>')
+def print_string(param:str):
+    print(param)
+    return param
 
-@app.route('/count/<int:x>')
-def count(x):
+@app.route('/count/<int:param>')
+def count(param:int):
     result = ''
-    for number in range(0,x+1):
+    for number in range(0,param+1):
         result += str(number) + "<br>"
     return result
 
 @app.route('/math/<int:num1><string:operation><int:num2>')
-def math(num1,operation,num2):
+def math(num1:int,operation:str,num2:int):
         if operation == '+':
             result = num1 + num2
         elif operation == '-':
@@ -29,13 +29,12 @@ def math(num1,operation,num2):
         elif operation == '*':
             result = num1 * num2
         elif operation == 'div':
-        # To handle division, we use a custom route segment 'div' instead of '/'
             result = num1 / num2
         elif operation == '%':
             result = num1 % num2
 
         if result is not None:
-            return f"The result of {num1} {operation} {num2} is: {result}"
+            return str(result)
         else:
             return "Invalid operation."
 
